@@ -1,4 +1,6 @@
-
+/**
+ * 
+ */
 package com.apb.college.apirest.dao;
 
 import java.util.List;
@@ -9,56 +11,55 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.apb.college.apirest.entity.User;
+import com.apb.college.apirest.entity.Course;
 
 /**
  * @author Jaime Peredo B.
  *
  */
-
-
 @Repository
-public class UserDAOImpl implements UserDAO {
+public class CourseDAOImpl implements CourseDAO{
 
 	@Autowired
 	private EntityManager entityManager;
 	
 	@Override
-	public List<User> findAll() {
+	public List<Course> findAll() {
+		
 		Session currentSession = entityManager.unwrap(Session.class);
 
-		Query<User> theQuery = currentSession.createQuery("from User", User.class);
+		Query<Course> theQuery = currentSession.createQuery("from Course", Course.class);
 		
-		List<User> users = theQuery.getResultList();
+		List<Course> courses = theQuery.getResultList();
 		
-		return users;
-
+		return courses;
+		
 	}
 
 	@Override
-	public User findById(int id) {
-		Session currentSession = entityManager.unwrap(Session.class);
-
-		User user = currentSession.get(User.class, id);
+	public Course findById(int id) {
 		
-		return user;
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		Course course = currentSession.get(Course.class,id);
+		return course;
 	}
 
 	@Override
-	public void save(User user) {
-		Session currentSession = entityManager.unwrap(Session.class);
+	public void save(Course course) {
+Session currentSession = entityManager.unwrap(Session.class);
 		
-		currentSession.saveOrUpdate(user);	
+		currentSession.saveOrUpdate(course);
 		
 	}
 
 	@Override
 	public void deleteById(int id) {
 		Session currentSession = entityManager.unwrap(Session.class);
-
-		Query<User> theQuery = currentSession.createQuery("delete from User where id=:idUser");
 		
-		theQuery.setParameter("idUser", id);
+		@SuppressWarnings("unchecked")
+		Query<Course> theQuery = currentSession.createQuery("delete from Course where id=:idCourse");
+		theQuery.setParameter("idCourse", id);
 		theQuery.executeUpdate();
 		
 	}

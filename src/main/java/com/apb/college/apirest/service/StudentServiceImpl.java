@@ -8,33 +8,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.apb.college.apirest.dao.UserDAO;
-import com.apb.college.apirest.entity.User;
+import com.apb.college.apirest.dao.StudentDAO;
+import com.apb.college.apirest.entity.Student;
 
 /**
  * @author Jaime Peredo B.
  *
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class StudentServiceImpl implements StudentService{
 	
 	@Autowired
-	private UserDAO userDAO;
+	private StudentDAO userDAO;
 	
 	@Override
-	public List<User> findAll() {
-		List<User> listUsers= userDAO.findAll();
+	public List<Student> findAll() {
+		List<Student> listUsers= userDAO.findAll();
 		return listUsers;
 	}
 
 	@Override
-	public User findById(int id) {
-		User user = userDAO.findById(id);
+	public Student findById(int id) {
+		Student user = userDAO.findById(id);
 		return user;
 	}
 
 	@Override
-	public void save(User user) {
+	public void save(Student user) {
 		userDAO.save(user);
 
 	}

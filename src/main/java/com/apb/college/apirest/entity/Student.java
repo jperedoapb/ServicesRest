@@ -10,11 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user")
-public class User {
+@Table(name="student")
+public class Student {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -32,9 +33,12 @@ public class User {
 	
 	@Column(name = "fecha_nacimiento", columnDefinition = "DATE")
 	private LocalDate fechaNacimiento;
+	
+	@ManyToOne
+	private Course course;
 
 
-	public User(int id, String nombre, String apellido, String libreta, LocalDate fechaNacimiento) {
+	public Student(int id, String nombre, String apellido, String libreta, LocalDate fechaNacimiento) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -42,7 +46,7 @@ public class User {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public User() {}
+	public Student() {}
 	
 
 	public int getId() {
@@ -85,11 +89,34 @@ public class User {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", libreta=" + libreta
-				+ ", fechaNacimiento=" + fechaNacimiento + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [id=");
+		builder.append(id);
+		builder.append(", nombre=");
+		builder.append(nombre);
+		builder.append(", apellido=");
+		builder.append(apellido);
+		builder.append(", libreta=");
+		builder.append(libreta);
+		builder.append(", fechaNacimiento=");
+		builder.append(fechaNacimiento);
+		builder.append(", course=");
+		builder.append(course);
+		builder.append("]");
+		return builder.toString();
 	}
+
+	
 
 	
 	
